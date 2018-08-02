@@ -1,0 +1,5 @@
+application:
+    locale: en-GB
+resource:
+    filename: quiz/quiz_
+    ext: .csv
