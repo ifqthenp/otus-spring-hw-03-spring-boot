@@ -28,7 +28,7 @@ public class QuizServiceImpl implements QuizService
         this.quiz = new Quiz();
         this.messageSource = messageSource;
         this.csvResourceService = csvResourceService;
-        this.locale = Locale.forLanguageTag(Objects.requireNonNull(env.getProperty("application.locale")));
+        this.locale = Locale.forLanguageTag(Objects.requireNonNull(env.getProperty("application.locale.i18n")));
     }
 
     @Override
