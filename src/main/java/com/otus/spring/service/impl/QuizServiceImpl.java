@@ -3,6 +3,7 @@ package com.otus.spring.service.impl;
 import com.otus.domain.model.Quiz;
 import com.otus.spring.service.CsvResourceService;
 import com.otus.spring.service.QuizService;
+import org.apache.commons.io.input.CloseShieldInputStream;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.core.env.Environment;
@@ -33,7 +34,7 @@ public class QuizServiceImpl implements QuizService
     @Override
     public void run()
     {
-        try (Scanner in = new Scanner(System.in)) {
+        try (Scanner in = new Scanner(new CloseShieldInputStream(System.in))) {
             System.out.print(messageSource.getMessage("user.name", null, locale));
             String userName = in.nextLine();
             System.out.println(messageSource.getMessage("user.introduction", new Object[]{ userName }, locale));
