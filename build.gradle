@@ -22,9 +22,9 @@ ext {
 dependencies {
     implementation("com.opencsv:opencsv:${openCsvVersion}")
     implementation('org.springframework.boot:spring-boot-starter')
-    implementation("commons-io:commons-io:$commonsIoVersion")
+    implementation("commons-io:commons-io:${commonsIoVersion}")
     testCompile('org.springframework.boot:spring-boot-starter-test')
-    testCompile("org.spockframework:spock-core:$spockVersion")
+    testCompile("org.spockframework:spock-core:${spockVersion}")
 }
 
 clean.doFirst {
