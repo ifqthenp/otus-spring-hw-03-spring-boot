@@ -1,0 +1,25 @@
+### Gradle
+.gradle
+build/
+gradle-app.setting
+!gradle-wrapper.jar
+.gradletasknamecache
+
+### IntelliJ
+.idea/
+*.iml
+*.iws
+out/
+.idea_modules/
+
+### Anything else
+.editorconfig
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache

@@ -34,13 +34,13 @@ chmod +x gradlew
 Build executable `jar`:
 
 ```shell
-./gradlew clean fatJar
+./gradlew clean test bootJar
 ```
 
 Run the program:
 
 ```shell
-java -jar build/libs/otus-spring-hw-02-java-annotations-config.jar
+java -jar build/libs/otus-spring-hw-03-spring-boot.jar
 ```
 
 ## Changing application locale
@@ -51,5 +51,5 @@ change locale in `application.properties` file and re-build the project using
 to the JVM:
 
 ```shell
-java -jar -Dapplication.locale=lv-LV build/libs/otus-spring-hw-02-fatjar.jar
+java -jar -Dapplication.locale=lv-LV build/libs/otus-spring-hw-03-spring-boot.jar
 ```
