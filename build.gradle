@@ -1,9 +1,20 @@
-plugins {
-    id "java"
-    id "groovy"
-    id "org.springframework.boot" version "2.0.4.RELEASE"
-    id "io.spring.dependency-management" version "1.0.6.RELEASE"
+buildscript {
+    ext {
+        springBootVersion = '2.1.1.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
 }
+
+apply plugin: 'java'
+apply plugin: 'groovy'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
 
 group = 'otus.spring.2018-06'
 version = '0.0.1-SNAPSHOT'
@@ -14,8 +25,9 @@ repositories {
 }
 
 ext {
-    openCsvVersion = '4.2'
-    spockVersion = '1.1-groovy-2.4'
+    openCsvVersion = '4.4'
+    spockVersion = '1.2-groovy-2.5'
+    groovyVersion = '2.5.5'
     commonsIoVersion = '2.6'
 }
 
@@ -26,6 +38,7 @@ dependencies {
     testCompile('org.springframework.boot:spring-boot-starter-test')
     testCompile("org.spockframework:spock-core:${spockVersion}")
     testCompile("org.spockframework:spock-spring:${spockVersion}")
+    testCompile("org.codehaus.groovy:groovy-all:${groovyVersion}")
 }
 
 clean.doFirst {
