@@ -29,11 +29,13 @@ ext {
     spockVersion = '1.2-groovy-2.5'
     groovyVersion = '2.5.5'
     commonsIoVersion = '2.6'
+    springShellVersion = '2.0.1.RELEASE'
 }
 
 dependencies {
     implementation("com.opencsv:opencsv:${openCsvVersion}")
     implementation('org.springframework.boot:spring-boot-starter')
+    implementation("org.springframework.shell:spring-shell-starter:${springShellVersion}")
     implementation("commons-io:commons-io:${commonsIoVersion}")
     testCompile('org.springframework.boot:spring-boot-starter-test')
     testCompile("org.spockframework:spock-core:${spockVersion}")
