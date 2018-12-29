@@ -2,7 +2,6 @@ package com.otus.spring.service.impl;
 
 import com.opencsv.bean.CsvToBeanBuilder;
 import com.otus.domain.model.Quiz;
-import com.otus.spring.config.AppLocaleSettings;
 import com.otus.spring.service.CsvResourceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
@@ -21,8 +20,8 @@ public class CsvResourceServiceImpl implements CsvResourceService {
     private final Resource resource;
 
     @Autowired
-    public CsvResourceServiceImpl(final AppLocaleSettings locale, final ResourceLoader resLoader) {
-        this.resource = resLoader.getResource(locale.getFile() + locale.getI18n() + locale.getExt());
+    public CsvResourceServiceImpl(final String appLocale, final ResourceLoader resLoader) {
+        this.resource = resLoader.getResource(appLocale);
     }
 
     public List<Quiz> getQuizList() {
@@ -30,10 +29,10 @@ public class CsvResourceServiceImpl implements CsvResourceService {
         try (InputStream is = resource.getInputStream();
              BufferedReader br = new BufferedReader(new InputStreamReader(is))) {
             beans = new CsvToBeanBuilder<Quiz>(br).withType(Quiz.class).build().parse();
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return beans;
     }
+
 }
