@@ -1,3 +1,6 @@
 application:
   locale:
     i18n: en-GB
+spring:
+  main:
+    banner-mode: "off"
