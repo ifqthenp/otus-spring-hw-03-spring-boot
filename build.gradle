@@ -53,6 +53,9 @@ dependencies {
         "org.junit.vintage:junit-vintage-engine:${junitVintageVersion}"
     )
 }
+
+test {
+    useJUnitPlatform()
 }
 
 clean.doFirst {
