@@ -15,16 +15,17 @@ import java.util.Objects;
 import java.util.Scanner;
 
 @Service
-public class QuizServiceImpl implements QuizService
-{
+public class QuizServiceImpl implements QuizService {
+
     private final Quiz quiz;
     private final Locale locale;
     private final CsvResourceService csvResourceService;
     private final ReloadableResourceBundleMessageSource messageSource;
 
     @Autowired
-    public QuizServiceImpl(final CsvResourceService csvResourceService, final ReloadableResourceBundleMessageSource messageSource, final Environment env)
-    {
+    public QuizServiceImpl(final CsvResourceService csvResourceService,
+                           final ReloadableResourceBundleMessageSource messageSource,
+                           final Environment env) {
         this.quiz = new Quiz();
         this.messageSource = messageSource;
         this.csvResourceService = csvResourceService;
@@ -32,22 +33,21 @@ public class QuizServiceImpl implements QuizService
     }
 
     @Override
-    public void run()
-    {
+    public void run() {
         try (Scanner in = new Scanner(new CloseShieldInputStream(System.in))) {
             System.out.print(messageSource.getMessage("user.name", null, locale));
             String userName = in.nextLine();
-            System.out.println(messageSource.getMessage("user.introduction", new Object[]{ userName }, locale));
+            System.out.println(messageSource.getMessage("user.introduction", new Object[]{userName}, locale));
 
             List<Quiz> quizList = csvResourceService.getQuizList();
 
             for (Quiz q : quizList) {
-                System.out.println(messageSource.getMessage("user.question", new Object[]{ q.getQuestion() }, locale));
+                System.out.println(messageSource.getMessage("user.question", new Object[]{q.getQuestion()}, locale));
                 List<String> options = q.getOptions();
 
                 int index = 1;
                 for (String option : options) {
-                    System.out.println(messageSource.getMessage("user.options", new Object[]{ index, option }, locale));
+                    System.out.println(messageSource.getMessage("user.options", new Object[]{index, option}, locale));
                     index++;
                 }
                 System.out.print(messageSource.getMessage("user.answer", null, locale));
@@ -57,13 +57,13 @@ public class QuizServiceImpl implements QuizService
 
             final int userScore = getTotalScore();
             final int maxScore = quiz.getUserAnswers().size();
-            System.out.println(messageSource.getMessage("user.totalScore", new Object[]{ userScore, maxScore }, locale));
+            System.out.println(messageSource.getMessage("user.totalScore", new Object[]{userScore, maxScore}, locale));
         }
     }
 
     @Override
-    public int getTotalScore()
-    {
+    public int getTotalScore() {
         return quiz.getUserAnswers().stream().mapToInt(Integer::intValue).sum();
     }
+
 }
