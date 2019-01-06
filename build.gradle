@@ -30,17 +30,29 @@ ext {
     groovyVersion = '2.5.5'
     commonsIoVersion = '2.6'
     springShellVersion = '2.0.1.RELEASE'
+    junitJupiterVersion = '5.3.2'
+    junitVintageVersion = '5.3.2'
 }
 
 dependencies {
-    implementation("com.opencsv:opencsv:${openCsvVersion}")
-    implementation('org.springframework.boot:spring-boot-starter')
-    implementation("org.springframework.shell:spring-shell-starter:${springShellVersion}")
-    implementation("commons-io:commons-io:${commonsIoVersion}")
-    testCompile('org.springframework.boot:spring-boot-starter-test')
-    testCompile("org.spockframework:spock-core:${spockVersion}")
-    testCompile("org.spockframework:spock-spring:${spockVersion}")
-    testCompile("org.codehaus.groovy:groovy-all:${groovyVersion}")
+    implementation(
+        "com.opencsv:opencsv:${openCsvVersion}",
+        "commons-io:commons-io:${commonsIoVersion}",
+        'org.springframework.boot:spring-boot-starter',
+        "org.springframework.shell:spring-shell-starter:${springShellVersion}"
+    )
+    testImplementation(
+        "org.spockframework:spock-core:${spockVersion}",
+        "org.spockframework:spock-spring:${spockVersion}",
+        "org.codehaus.groovy:groovy-all:${groovyVersion}",
+        'org.springframework.boot:spring-boot-starter-test',
+        "org.junit.jupiter:junit-jupiter-api:${junitJupiterVersion}"
+    )
+    testRuntimeOnly(
+        "org.junit.jupiter:junit-jupiter-engine:${junitJupiterVersion}",
+        "org.junit.vintage:junit-vintage-engine:${junitVintageVersion}"
+    )
+}
 }
 
 clean.doFirst {
