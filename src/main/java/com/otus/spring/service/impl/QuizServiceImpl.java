@@ -17,7 +17,7 @@ import java.util.Scanner;
 @Service
 public class QuizServiceImpl implements QuizService {
 
-    private final Quiz quiz;
+    private Quiz quiz;
     private final Locale locale;
     private final List<Quiz> quizList;
     private final ReloadableResourceBundleMessageSource messageSource;
@@ -26,7 +26,6 @@ public class QuizServiceImpl implements QuizService {
     public QuizServiceImpl(final CsvResourceService csvResourceService,
                            final ReloadableResourceBundleMessageSource messageSource,
                            final Environment env) {
-        this.quiz = new Quiz();
         this.messageSource = messageSource;
         this.locale = Locale.forLanguageTag(Objects.requireNonNull(env.getProperty("application.locale.i18n")));
         this.quizList = csvResourceService.getQuizList();
@@ -34,6 +33,7 @@ public class QuizServiceImpl implements QuizService {
 
     @Override
     public void run() {
+        this.quiz = new Quiz();
         try (Scanner in = new Scanner(new CloseShieldInputStream(System.in))) {
             System.out.print(messageSource.getMessage("user.name", null, locale));
             String userName = in.nextLine();
