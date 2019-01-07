@@ -19,7 +19,7 @@ public class QuizServiceImpl implements QuizService {
 
     private final Quiz quiz;
     private final Locale locale;
-    private final CsvResourceService csvResourceService;
+    private final List<Quiz> quizList;
     private final ReloadableResourceBundleMessageSource messageSource;
 
     @Autowired
@@ -28,8 +28,8 @@ public class QuizServiceImpl implements QuizService {
                            final Environment env) {
         this.quiz = new Quiz();
         this.messageSource = messageSource;
-        this.csvResourceService = csvResourceService;
         this.locale = Locale.forLanguageTag(Objects.requireNonNull(env.getProperty("application.locale.i18n")));
+        this.quizList = csvResourceService.getQuizList();
     }
 
     @Override
@@ -38,8 +38,6 @@ public class QuizServiceImpl implements QuizService {
             System.out.print(messageSource.getMessage("user.name", null, locale));
             String userName = in.nextLine();
             System.out.println(messageSource.getMessage("user.introduction", new Object[]{userName}, locale));
-
-            List<Quiz> quizList = csvResourceService.getQuizList();
 
             for (Quiz q : quizList) {
                 System.out.println(messageSource.getMessage("user.question", new Object[]{q.getQuestion()}, locale));
