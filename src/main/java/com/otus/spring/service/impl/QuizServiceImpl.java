@@ -61,7 +61,7 @@ public class QuizServiceImpl implements QuizService {
 
     @Override
     public int getTotalScore() {
-        return quiz.getUserAnswers().stream().mapToInt(Integer::intValue).sum();
+        return quiz == null ? 0 : quiz.getUserAnswers().stream().mapToInt(Integer::intValue).sum();
     }
 
 }
