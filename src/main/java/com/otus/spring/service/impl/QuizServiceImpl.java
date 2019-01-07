@@ -9,6 +9,7 @@ import org.springframework.context.support.ReloadableResourceBundleMessageSource
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
@@ -29,6 +30,11 @@ public class QuizServiceImpl implements QuizService {
         this.messageSource = messageSource;
         this.locale = Locale.forLanguageTag(Objects.requireNonNull(env.getProperty("application.locale.i18n")));
         this.quizList = csvResourceService.getQuizList();
+    }
+
+    @PostConstruct
+    public void welcome() {
+        System.out.println(messageSource.getMessage("welcome", null, locale));
     }
 
     @Override
