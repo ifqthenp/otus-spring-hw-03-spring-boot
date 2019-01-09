@@ -20,7 +20,7 @@ import java.util.Scanner;
 
 @Service
 @ShellComponent
-@ShellCommandGroup("quiz")
+@ShellCommandGroup("Quiz")
 public class QuizServiceImpl implements QuizService {
 
     private Quiz quiz;
