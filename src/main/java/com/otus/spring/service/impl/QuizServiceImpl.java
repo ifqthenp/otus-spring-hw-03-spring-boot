@@ -61,8 +61,8 @@ public class QuizServiceImpl implements QuizService {
                     index++;
                 }
                 System.out.print(messageSource.getMessage("user.answer", null, locale));
-                int input = in.nextInt();
-                quiz.convertInputToScore(q, options.get(input - 1));
+                int answer = getUserAnswer(in);
+                quiz.convertInputToScore(q, options.get(answer - 1));
             }
 
             final int userScore = getTotalScore();
@@ -75,6 +75,26 @@ public class QuizServiceImpl implements QuizService {
     @ShellMethod(value = "Get total quiz score.", key = "score")
     public int getTotalScore() {
         return quiz == null ? 0 : quiz.getUserAnswers().stream().mapToInt(Integer::intValue).sum();
+    }
+
+    private int getUserAnswer(final Scanner in) {
+        int input;
+        boolean isOutOfBound;
+        final int lowerBound = 1;
+        final int upperBound = quizList.size() - 1;
+
+        do {
+            while (!in.hasNextInt()) {
+                System.out.print("Please enter an integer for answer: ");
+                in.next();
+            }
+            input = in.nextInt();
+
+            isOutOfBound = input < lowerBound || input >= upperBound;
+            if (isOutOfBound) System.out.print("Enter correct number: ");
+
+        } while (isOutOfBound);
+        return input;
     }
 
 }
