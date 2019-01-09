@@ -7,6 +7,9 @@ import org.apache.commons.io.input.CloseShieldInputStream;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.core.env.Environment;
+import org.springframework.shell.standard.ShellCommandGroup;
+import org.springframework.shell.standard.ShellComponent;
+import org.springframework.shell.standard.ShellMethod;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
@@ -16,6 +19,8 @@ import java.util.Objects;
 import java.util.Scanner;
 
 @Service
+@ShellComponent
+@ShellCommandGroup("quiz")
 public class QuizServiceImpl implements QuizService {
 
     private Quiz quiz;
@@ -38,6 +43,7 @@ public class QuizServiceImpl implements QuizService {
     }
 
     @Override
+    @ShellMethod(value = "Run quiz.", key = "start")
     public void run() {
         this.quiz = new Quiz();
         try (Scanner in = new Scanner(new CloseShieldInputStream(System.in))) {
@@ -66,6 +72,7 @@ public class QuizServiceImpl implements QuizService {
     }
 
     @Override
+    @ShellMethod(value = "Get total quiz score.", key = "score")
     public int getTotalScore() {
         return quiz == null ? 0 : quiz.getUserAnswers().stream().mapToInt(Integer::intValue).sum();
     }
