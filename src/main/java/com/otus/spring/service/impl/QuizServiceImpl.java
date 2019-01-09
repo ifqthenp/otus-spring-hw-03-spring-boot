@@ -85,13 +85,13 @@ public class QuizServiceImpl implements QuizService {
 
         do {
             while (!in.hasNextInt()) {
-                System.out.print("Please enter an integer for answer: ");
+                System.out.print(messageSource.getMessage("input.error.integer", null, locale));
                 in.next();
             }
             input = in.nextInt();
 
             isOutOfBound = input < lowerBound || input >= upperBound;
-            if (isOutOfBound) System.out.print("Enter correct number: ");
+            if (isOutOfBound) System.out.print(messageSource.getMessage("input.error.option", null, locale));
 
         } while (isOutOfBound);
         return input;
