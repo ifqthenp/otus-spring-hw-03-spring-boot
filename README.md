@@ -51,5 +51,5 @@ change locale in `application.properties` file and re-build the project using
 to the JVM:
 
 ```shell
-java -jar -Dapplication.locale=lv-LV build/libs/otus-spring-hw-03-spring-boot.jar
+java -jar -Dapplication.locale.i18n=ru-RU build/libs/otus-spring-hw-03-spring-boot.jar
 ```
