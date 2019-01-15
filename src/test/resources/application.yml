@@ -1,5 +1,6 @@
 application:
   locale:
-    file: quiz/quiz_
     i18n: en-GB
-    ext: .csv
+spring:
+  main:
+    banner-mode: "off"

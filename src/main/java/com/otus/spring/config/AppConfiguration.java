@@ -1,10 +1,7 @@
 package com.otus.spring.config;
 
-import com.otus.spring.service.QuizService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
@@ -32,14 +29,6 @@ public class AppConfiguration {
     @Bean
     public String appLocale() {
         return this.localeSettings.getI18n();
-    }
-
-    @Bean
-    public CommandLineRunner commandLineRunner(ApplicationContext ctx) {
-        return args -> {
-            QuizService quizService = ctx.getBean(QuizService.class);
-            quizService.run();
-        };
     }
 
 }

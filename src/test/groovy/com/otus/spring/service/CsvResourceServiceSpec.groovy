@@ -1,16 +1,20 @@
 package com.otus.spring.service
 
 import com.otus.domain.model.Quiz
-import com.otus.spring.config.AppConfiguration
-import com.otus.spring.config.AppLocaleSettings
-import com.otus.spring.service.impl.CsvResourceServiceImpl
+import org.spockframework.spring.SpringBean
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.test.context.ContextConfiguration
+import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.shell.Shell
 import spock.lang.Specification
+import spock.lang.Subject
 
-@ContextConfiguration(classes = [AppConfiguration, AppLocaleSettings, CsvResourceServiceImpl])
+@SpringBootTest
 class CsvResourceServiceSpec extends Specification {
 
+    @SpringBean
+    Shell shell = Mock()
+
+    @Subject
     @Autowired
     CsvResourceService csvResourceService
 
@@ -23,6 +27,7 @@ class CsvResourceServiceSpec extends Specification {
         List<Quiz> quizList = csvResourceService.getQuizList()
 
         then:
+        quizList != null
         quizList.size() > 0
     }
 }
